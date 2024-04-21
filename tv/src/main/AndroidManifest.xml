@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" /> <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:banner="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AmazonHDR">
+        <activity
+            android:name=".MessageActivity"
+            android:exported="false"
+            android:label="@string/title_activity_message"
+            android:theme="@style/Theme.AmazonHDR" />
+        <activity
+            android:name=".ScoreCaptureActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".VideoPlayerActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".InfoUserActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.theme.InfoActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".PlayerActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

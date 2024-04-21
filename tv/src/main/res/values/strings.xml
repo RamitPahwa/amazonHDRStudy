@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">AmazonHDR</string>
+    <string name="title_activity_message">MessageActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="finish">Finish.</string>
+    <string name="training_start_message">
+        Thank you for your participation!\n
+        You will be watching a set of videos one after the other.\n
+        At the end of each video, a rating screen will be presented to you.\n
+        For each video, please provide an overall quality score by choosing on the continuous rating bar.\n
+        If you have any questions please ask them now.\n
+        Click Next to start the training!
+    </string>
+    <string name="session_start_message">
+        Thank you for your participation!\n
+        You will be watching a set of videos one after the other.\n
+        At the end of each video, a rating screen will be presented to you.\n
+        For each video, please provide an overall quality score by choosing on the continuous rating bar.\n
+        If you have any questions please ask them now.\n
+        Click Next to start the Session!
+    </string>
+    <string name="session_end_message">
+        Study ends!\n Thanks very much for your participation!
+    </string>
+    <string name="lorem_ipsum">ictum libero quis erat maximus, vitae volutpat diam dignissim</string>
+</resources>

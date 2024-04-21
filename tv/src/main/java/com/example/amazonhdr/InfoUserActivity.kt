@@ -55,7 +55,6 @@ class InfoUserActivity : AppCompatActivity() {
                 {
                     sessionManagement.setIsTrain(false)
                     showStartMessage(1)
-                    moveToHumanStudy()
                 }
 
 

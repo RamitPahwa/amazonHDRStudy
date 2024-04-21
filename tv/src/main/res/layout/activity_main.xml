@@ -34,7 +34,7 @@
         android:id="@+id/buttonConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#1399FF"
+        android:background="@color/red"
         android:onClick="onStartButtonClicked"
         android:text="Start"
         android:textAllCaps="false"

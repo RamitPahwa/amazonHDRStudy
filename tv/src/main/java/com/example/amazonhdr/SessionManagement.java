@@ -15,6 +15,8 @@ public class SessionManagement {
     String SESSION_KEY = "session_user";
     String VIDEO_KEY = "video_count";
     String SESSID_KEY =  "sess_id_count";
+
+    String TVID_KEY =  "tv_id";
     String NAME_KEY = "name";
 
     String TRAIN_VIDEO_KEY = "train_video_count";
@@ -32,10 +34,12 @@ public class SessionManagement {
         int id = user.getId();
         String name = user.getName();
         int sessID = user.getSessID();
+        int tvID = user.getTVID();
         int videoCompleted = user.getVidCompleted();
         int trainVideoCompleted = user.getTrainVidCompleted();
         boolean isTrain = user.getIsTrain();
         editor.putInt(SESSION_KEY,id).commit();
+        editor.putInt(TVID_KEY,tvID).commit();
         editor.putInt(VIDEO_KEY,videoCompleted).commit();
         editor.putString(NAME_KEY,name).commit();
         editor.putInt(SESSID_KEY,sessID).commit();
@@ -51,7 +55,7 @@ public class SessionManagement {
         //}
 
 
-        String path_file = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Download/Portrait/"+String.valueOf(id)+"_"+name+"_"+String.valueOf(sessID)+".txt";
+        String path_file = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Download/Portrait/"+String.valueOf(id)+"_"+name+"_"+String.valueOf(sessID)+"_TV"+String.valueOf(tvID)+".txt";
         System.out.println(path_file);
         File scoreFile = new File (path_file);
         try {
@@ -68,6 +72,11 @@ public class SessionManagement {
     public int getSession(){
         // return user whose session is saved
         return sharedPreferences.getInt(SESSION_KEY,-1);
+    }
+
+    public int getTVID(){
+        // return user whose session is saved
+        return sharedPreferences.getInt(TVID_KEY,-1);
     }
 
     public int getVideoCount(){

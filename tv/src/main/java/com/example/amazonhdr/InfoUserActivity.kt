@@ -15,6 +15,7 @@ class InfoUserActivity : AppCompatActivity() {
     private var txtUserID: EditText? = null
     private var txtPreferredName:EditText? = null
     private var txtSessionID:EditText? = null
+    private var txtTVID:EditText? = null
     private var btnLogin: Button? = null
     private var mLastClickTime1: Long = 0
 
@@ -26,6 +27,7 @@ class InfoUserActivity : AppCompatActivity() {
         txtPreferredName = findViewById(R.id.txtPreferredName)
         txtSessionID = findViewById(R.id.txtSessionID)
         btnLogin = findViewById<Button>(R.id.btn_login)
+        txtTVID = findViewById(R.id.txtTVID)
 
         btnLogin?.setOnClickListener {
             mLastClickTime1 = SystemClock.elapsedRealtime()
@@ -33,14 +35,15 @@ class InfoUserActivity : AppCompatActivity() {
             val userID = txtUserID?.text.toString()
             val preferredName = txtPreferredName?.text.toString()
             val sessionID = txtSessionID?.text.toString()
+            val tvID = txtTVID?.text.toString()
 
-            if (TextUtils.isEmpty(userID) || TextUtils.isEmpty(preferredName) || TextUtils.isEmpty(sessionID)) {
+            if (TextUtils.isEmpty(userID) || TextUtils.isEmpty(preferredName) || TextUtils.isEmpty(sessionID) || TextUtils.isEmpty(tvID)) {
                 Toast.makeText(this, "One or more empty field, please try again",Toast.LENGTH_SHORT).show()
 
-            } else if (!TextUtils.isDigitsOnly(userID) || !TextUtils.isDigitsOnly(sessionID)) {
+            } else if (!TextUtils.isDigitsOnly(userID) || !TextUtils.isDigitsOnly(sessionID) || !TextUtils.isDigitsOnly(tvID)) {
                 Toast.makeText(this, "User ID and Session ID should be digits only",Toast.LENGTH_SHORT).show()
             } else {
-                val user = User(userID.toInt(), preferredName, sessionID.toInt())
+                val user = User(userID.toInt(), preferredName, sessionID.toInt(), tvID.toInt())
                 Toast.makeText(this, "One or more empty field, please try again",Toast.LENGTH_SHORT).show()
                 val sessionManagement = SessionManagement(this)
                 sessionManagement.saveSession(user)

@@ -8,17 +8,20 @@ public class User {
     int vidCompleted = 0;
 
     int trainVidCompleted = 0;
-
     boolean isTrain = false;
 
+    int tvID;
+
+
     // This should be singleton class, but no worries
-    public User(int id, String name, int sessID) {
+    public User(int id, String name, int sessID, int tvID) {
         this.id = id;
         this.name = name;
         this.sessID = sessID;
         this.vidCompleted = 0;
         this.trainVidCompleted = 0;
         this.isTrain = false;
+        this.tvID = tvID;
 
     }
 
@@ -44,6 +47,14 @@ public class User {
 
     public void setSessID(int sessID) {
         this.sessID = sessID;
+    }
+
+    public int getTVID() {
+        return tvID;
+    }
+
+    public void setTVID(int tvID) {
+        this.tvID = tvID;
     }
 
     public int getVidCompleted() {

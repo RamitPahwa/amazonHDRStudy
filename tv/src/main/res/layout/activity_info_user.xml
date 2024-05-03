@@ -51,6 +51,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/txtTVID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="TV ID"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textColorHint="#808080"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPreferredName" />
+
+    <EditText
         android:id="@+id/txtSessionID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,6 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPreferredName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTVID" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

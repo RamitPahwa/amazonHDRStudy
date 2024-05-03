@@ -60,9 +60,9 @@ class ScoreCaptureActivity : AppCompatActivity() {
                 var trainVideoNameRate = ""
 
                 val trainFileNames = listOf<String>(
-                    "/Download/Live_sports1_HDR10_3840x2160_6000k_11.mp4",
-                    "/Download/Live_sports1_HDR10_3840x2160_6000k_11.mp4",
-                    "/Download/Live_sports1_HDR10_3840x2160_6000k_11.mp4"
+                    "/Download/HDR10+.mp4",
+                    "/Download/HDR10.mp4",
+                    "/Download/SDR.mp4"
                 )
 
                 val videoNameRate = trainFileNames[trainVideoIndexRate]

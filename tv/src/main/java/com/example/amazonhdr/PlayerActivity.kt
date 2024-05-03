@@ -21,6 +21,7 @@ import androidx.media3.common.util.Util
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.amazonhdr.databinding.ActivityPlayerBinding
 import java.io.BufferedReader
+import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
 
@@ -48,16 +49,17 @@ class PlayerActivity : AppCompatActivity() {
         val videoIndex = sessionManagement.videoCount
         val userID = sessionManagement.session
         val sessID = sessionManagement.sessID
+        val tvID = sessionManagement.tvid
         val trainVideoIndex = sessionManagement.trainVideoCount
-        val playlistFilePath = userID.toString() + "_" + sessID.toString() + ".txt"
+        val playlistFilePath = userID.toString() + "_" + sessID.toString() + "_TV"+ tvID.toString() + ".txt"
 
         var trainSession = true
 
         trainSession = intent.getBooleanExtra("train", false)
         val trainFileNames = listOf<String>(
-            "/Download/Live_sports1_HDR10_3840x2160_6000k_11.mp4",
-            "/Download/Live_sports1_HDR10_3840x2160_6000k_11.mp4",
-            "/Download/Live_sports1_HDR10_3840x2160_6000k_11.mp4"
+            "/Download/HDR10+.mp4",
+            "/Download/HDR10.mp4",
+            "/Download/SDR.mp4"
         )
 
         if (trainSession) {
@@ -78,36 +80,43 @@ class PlayerActivity : AppCompatActivity() {
 
         } else {
             sessionManagement.incrementVideoCount()
-            val length = 2
-            if (videoIndex != length) {
-                // /sdcard/Download/WOT_S2E1_HDR10_3840x2160_6000k_8.mp4
-                //setVideo(files[videoIndex].getName());
-                var reader: BufferedReader? = null
-                try {
-                    reader = BufferedReader(
-                        InputStreamReader(assets.open(playlistFilePath), "UTF-8")
-                    )
-                    val mLine: String
-                    for (loop in 0 until videoIndex) reader.readLine()
-                    mLine = reader.readLine()
-                    Log.d("player", mLine)
-                    setVideo(mLine, false)
-                } catch (e: IOException) {
-                    println(e)
-                } finally {
-                    if (reader != null) {
-                        try {
-                            reader.close()
-                        } catch (e: IOException) {
-                            println(e)
-                        }
-                    }
-                }
-            } else {
-                moveToFinalPage()
-            }
+            playVideo(videoIndex, playlistFilePath)
+
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    public fun playVideo(videoIndex :Int, playlistFilePath : String)
+    {
+        val length = 135
+        if (videoIndex != length) {
+            // /sdcard/Download/WOT_S2E1_HDR10_3840x2160_6000k_8.mp4
+            //setVideo(files[videoIndex].getName());
+            var reader: BufferedReader? = null
+            try {
+                reader = BufferedReader(
+                    InputStreamReader(assets.open(playlistFilePath), "UTF-8")
+                )
+                val mLine: String
+                for (loop in 0 until videoIndex) reader.readLine()
+                mLine = reader.readLine()
+                Log.d("player", mLine)
+                setVideo(mLine, false)
+            } catch (e: IOException) {
+                println(e)
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close()
+                    } catch (e: IOException) {
+                        println(e)
+                    }
+                }
+            }
+        } else {
+            moveToFinalPage()
+        }
     }
 
     //    public override fun onStart() {
@@ -153,10 +162,54 @@ class PlayerActivity : AppCompatActivity() {
         }
         player = null
     }
+//    /storage/08F0-1B5B/DATASET/videos
 
     @RequiresApi(Build.VERSION_CODES.R)
+    private fun copyFiles(playlistFilePath : String, playlistLength : Int, onCompletionCallBack: onCompletionCallBack)
+    {
+        val sourceVideoPath = Environment.getStorageDirectory().absolutePath + "/08F0-1B5B/DATASET/videos/"
+        val targetVideoPath = Environment.getExternalStorageDirectory().absolutePath
+
+        var reader: BufferedReader? = null
+        try {
+            reader = BufferedReader(
+                InputStreamReader(assets.open(playlistFilePath), "UTF-8")
+            )
+            val mLine: String
+            for (loop in 0 until playlistLength)
+            {
+                var videoPath = reader.readLine()
+                var videoName = videoPath.split("/")[2]
+                var s_path = sourceVideoPath + videoName
+                var sFile = File(s_path)
+                var d_path = targetVideoPath + videoPath
+                val to = File(d_path)
+                if(to.exists().not()) {
+                    to.createNewFile()
+
+                }
+                sFile.copyTo(to, true)
+            }
+//            onCompletionCallBack.onComplete()
+        } catch (e: IOException) {
+            onCompletionCallBack.onError()
+            println(e)
+        } finally {
+            if (reader != null) {
+                try {
+                    onCompletionCallBack.onComplete()
+                    reader.close()
+                } catch (e: IOException) {
+                    onCompletionCallBack.onError()
+                    println(e)
+                }
+            }
+        }
+
+    }
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun setVideo(fileName: String, train: Boolean) {
-        val videoPath = Environment.getExternalStorageDirectory().absolutePath + fileName
+        val videoPath = Environment.getExternalStorageDirectory().absolutePath + "/" + fileName.split("/")[1] + "/TV1_merged/" +fileName.split("/")[2]
         val videoUri = Uri.parse(videoPath)
         val mediaItem = MediaItem.fromUri(videoUri)
 
@@ -249,5 +302,11 @@ class PlayerActivity : AppCompatActivity() {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.putExtra("displayID", 1)
         startActivity(intent)
+    }
+
+    public interface onCompletionCallBack
+    {
+        fun onComplete()
+        fun onError()
     }
 }

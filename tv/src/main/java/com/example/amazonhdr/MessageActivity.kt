@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import org.w3c.dom.Text
 
 class MessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +13,9 @@ class MessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_message2)
         val mIntent = intent
         val displayID = mIntent.getIntExtra("displayID", -1)
-        val nxtBtn = findViewById<Button>(R.id.button)
+//        val nxtBtn = findViewById<Button>(R.id.message_button)
+        val nxtBtn = findViewById<Button>(R.id.message_button)
+        nxtBtn.setBackgroundResource(R.color.red)
 
         if (displayID == 0)
         {
@@ -32,8 +33,7 @@ class MessageActivity : AppCompatActivity() {
                 moveToHumanStudy()
             }
         }
-        else
-        {
+        else        {
             findViewById<TextView>(R.id.textView).text = getString(R.string.session_end_message)
             nxtBtn.setText(R.string.finish)
             nxtBtn.setOnClickListener {
@@ -79,7 +79,7 @@ class MessageActivity : AppCompatActivity() {
     {
         WELCOME_SCREEN_TRAINING(0, R.string.training_start_message.toString()),
         WELCOME_SCREEN(1, R.string.session_start_message.toString()),
-        END_SCREEN(2, R.string.session_end_message.toString())
+        END_CREEN(2, R.string.session_end_message.toString())
     }
 
 
